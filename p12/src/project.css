@@ -1,0 +1,121 @@
+@media screen and (min-width: 1024px) and (min-height: 780px){
+	body{
+		margin: auto;
+	}
+	header,.verticalLayer{
+		background-color: black;
+	}
+	header{
+		display: flex;
+		justify-content: space-between;
+		padding: 10px 40px 0px 10px;
+		height: 91px;
+		font-size: 25px;
+	}
+	.Logo_SoprtSee{
+		display: flex;
+		color: #E60000;
+	}
+	.logo{
+		width:57px;
+		height:57px;
+	}
+	header a,.verticalLayer a{
+		color: white;
+		text-decoration: none;
+	}
+	header a{
+		margin-top:25px;
+	}
+	.mainDiv{
+		width: 100%;
+		display: flex;
+	}
+	.verticalLayer{
+		color: white;
+		width: 200px;
+		min-height: 720px;
+		max-height: 100%;
+		margin-top: 0px;
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
+	.href{
+		display: flex;
+		flex-direction: column;
+	}
+	.href .logo2{
+		border-radius: 6px;
+		margin-top: 6px;
+		margin-bottom: 6px;
+	}
+	.Copiryght{
+		transform: rotate(-90deg);
+		margin-top: 150px;
+	}
+	.Personna{
+		width: 100%;
+		margin-left: 50px;
+	}
+	.Title{
+		display: flex;
+	}
+	.PersonnaName{
+		color: #E60000;
+		margin-left: 10px;
+	}
+	.PersonnaDiv{
+		width: 99%;
+		display: flex;
+		justify-content: space-between;
+	}
+	.PersonnaDiv1{
+		width: 85%;
+	}
+	.PersonnaDailyActivity{
+		width: 100%;
+		height: 320px;
+		margin-bottom: 25px;
+	}
+	.PersonnaScore{
+		display: flex;
+		justify-content: space-between;
+	}
+	.TimeSessions{
+		background-color: #E60000;
+		color: white;
+		border-radius: 6px;
+		width: 31%;
+		height: 320px;
+	}
+	.Graphics{
+		background-color: #282D30;
+		color: white;
+		border-radius: 6px;
+		width: 31%;
+		height: 320px;
+	}
+	.TimeSessions,.ObjectifScore,.Graphics{
+		padding-top: 30px;
+		padding-left: 25px;
+	}/**/
+	.ObjectifScore{
+		width: 31%;
+		height: 320px;
+	}
+	.PersonnaDailyActivity,.ObjectifScore,.PersonnaFood{
+		background-color: #f3f3f3;
+		border-radius: 6px;
+	}
+	.PersonnaFood{
+		height: 124px;
+		width: 258px;
+		margin-bottom: 25px;
+	}
+	.logoPersonnaFood{
+		width: 64px;
+		height: 64px;
+		margin-top: 25px;
+		margin-right: 25px;
+	}
+} 
