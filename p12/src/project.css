@@ -98,8 +98,13 @@
 	.TimeSessions,.ObjectifScore,.Graphics{
 		padding-top: 30px;
 		padding-left: 25px;
-	}/**/
+	}
+	.TimeSessions{
+		text-align: left;
+		color: #d0d0d0;
+	}
 	.ObjectifScore{
+		text-align: left;
 		width: 31%;
 		height: 320px;
 	}
@@ -111,11 +116,25 @@
 		height: 124px;
 		width: 258px;
 		margin-bottom: 25px;
+		padding-left: 25px;
+		display: flex;
+	}
+	.PersonnaFood .h1PersonnaFood{
+		font-size: 25px;
 	}
 	.logoPersonnaFood{
 		width: 64px;
 		height: 64px;
 		margin-top: 25px;
 		margin-right: 25px;
+	}
+	.text-color-class,.text-color-class1{
+		color:black;
+	}
+	.text-color-class1{
+		font-size: 25px;
+		display: block;
+		width: 100px;
+		text-align: center;
 	}
 } 

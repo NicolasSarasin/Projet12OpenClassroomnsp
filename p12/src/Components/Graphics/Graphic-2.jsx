@@ -1,31 +1,29 @@
 import "../../project.css";
 import React from "react";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-const data = [
-  { name: 'Jan', uv: 4000, pv: 2400, amt: 2400 },
-  { name: 'Feb', uv: 3000, pv: 1398, amt: 2210 },
-  { name: 'Mar', uv: 2000, pv: 9800, amt: 2290 },
-  { name: 'Apr', uv: 2780, pv: 3908, amt: 2000 },
-  { name: 'May', uv: 1890, pv: 4800, amt: 2181 },
-  { name: 'Jun', uv: 2390, pv: 3800, amt: 2500 },
-  { name: 'Jul', uv: 3490, pv: 4300, amt: 2100 },
-];
-
-const MyCurveChart = () => {
+const MyCurveChart = (props) => {
+	const {SessionsLentgh} = props;
+  const data = [
+    { Day: SessionsLentgh.sessions[0].day, sessionlength: SessionsLentgh.sessions[0].sessionLength },
+    { Day: SessionsLentgh.sessions[1].day, sessionlength: SessionsLentgh.sessions[1].sessionLength },
+    { Day: SessionsLentgh.sessions[2].day, sessionlength: SessionsLentgh.sessions[2].sessionLength },
+    { Day: SessionsLentgh.sessions[3].day, sessionlength: SessionsLentgh.sessions[3].sessionLength },
+    { Day: SessionsLentgh.sessions[4].day, sessionlength: SessionsLentgh.sessions[4].sessionLength },
+    { Day: SessionsLentgh.sessions[5].day, sessionlength: SessionsLentgh.sessions[5].sessionLength },
+    { Day: SessionsLentgh.sessions[6].day, sessionlength: SessionsLentgh.sessions[6].sessionLength },
+  ];
   return (
     <ResponsiveContainer width="100%" height={300}>
       <LineChart
         data={data}
-        margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+        margin={{ top: 20, right: 30, left: -20, bottom: 5 }}
       >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Line type="monotone" dataKey="pv" stroke="#8884d8" strokeWidth={2} />
-        <Line type="monotone" dataKey="uv" stroke="#82ca9d" strokeWidth={2} />
+        <XAxis dataKey="Day" />
+        <YAxis domain={[0, 60]} />
+        <Tooltip contentStyle={{ backgroundColor: '#E60000', color:'white'}}/>
+        <Legend formatter={(value, entry, index) => <span className="text-color-class">{value}</span>}/>
+        <Line type="monotone" dataKey="sessionlength" stroke="#d0d0d0" strokeWidth={2} />
       </LineChart>
     </ResponsiveContainer>
   );

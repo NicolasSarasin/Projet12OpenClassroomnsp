@@ -1,7 +1,9 @@
 //import logo from './logo.svg';
 import './App.css';
 import "./project.css";
-//import ReceptAPI from "./Services/ReceptAPI.js";
+import ReceptAPI from "./Services/ReceptAPI.js";
+import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
 import Header from "./Components/Header/Header.jsx";
 import VerticalLayer from './Components/VerticalLayer/VerticalLayer.jsx';
 import PersonnaDiv from './Components/PersonnaDiv/PersonnaDiv.jsx';
@@ -10,48 +12,92 @@ import MyCurveChart from './Components/Graphics/Graphic-2.jsx';
 import HexagonalChart from './Components/Graphics/Graphic-3.jsx';
 import MyRadialBarChart from './Components/Graphics/Graphic-4.jsx';
 function App() {
-  return (
+	const { id } = useParams();
+	const [userMain, setUserMain] = useState({
+		userInfos:{},
+		keyData:{}
+	});
+	const [userActivity, setUserActivity] = useState({
+		sessions:[{},{},{},{},{},{},{}]
+	});
+	const [userSessions, setUserSessions] = useState({
+		sessions:[{},{},{},{},{},{},{}]
+	});
+	const [userPerformance, setUserPerformance] = useState({
+		kind:{},
+		data:[{},{},{},{},{},{}]
+	});
+	// Fetch data from one API when the component mounts
+	useEffect(() => {
+	  const fetchData = async () => {
+		const dataUserMain = await ReceptAPI.getUserMain(id);
+		setUserMain(dataUserMain); // Set the fetched data
+		console.log("UserMain",dataUserMain);
+	  };
+	  fetchData();  // Invoke the fetch function
+	}, [id]);  // Empty dependency array ensures this runs only once after the initial render
+	useEffect(() => {
+	  const fetchData = async () => {
+		const dataUserActivity = await ReceptAPI.getUserActivity(id);
+		setUserActivity(dataUserActivity); // Set the fetched data
+		console.log("UserActivity",dataUserActivity);
+	  };
+	  fetchData();  // Invoke the fetch function
+	}, [id]);
+	useEffect(() => {
+	const fetchData = async () => {
+		const dataUserSessions = await ReceptAPI.getUserSessions(id);
+		setUserSessions(dataUserSessions); // Set the fetched data
+		console.log("UserSession",dataUserSessions);
+	  };
+	  fetchData();  // Invoke the fetch function
+	}, [id]);
+	useEffect(() => {
+	  const fetchData = async () => {
+		const dataUserPerformance = await ReceptAPI.getUserPerformance(id);
+		setUserPerformance(dataUserPerformance); // Set the fetched data
+		console.log("UserPerformance",dataUserPerformance);
+	  };
+	  fetchData();  // Invoke the fetch function
+	}, [id]);
+	return (
     <div className="App">
     	<Header/>
 		<div className="mainDiv">
 			<VerticalLayer/>
 			<div className="Personna">
-				<div className="Title"><h1>Bonjour<span className="PersonnaName">Thomas</span></h1></div>
+				<div className="Title"><h1>Bonjour<span className="PersonnaName">{userMain.userInfos.firstName}</span></h1></div>
 				<div className="PersonnaDiv">
 					<div className="PersonnaDiv1">
 						<div className="PersonnaDailyActivity">
 							Activité quotidienne
-							<MyBarChart 
-								/*Calories=ReceptAPI.USER_ACTIVITY.sessions.calories, 
-								Kilogram=ReceptAPI.USER_ACTIVITY.sessions.kilogram, 
-								Day=ReceptAPI.USER_ACTIVITY.sessions.day*/
-							/>
+							<MyBarChart bars={userActivity}/>
 						</div>
 						<div className="PersonnaScore">
 							<div className="TimeSessions">
 								Durée moyenne des sessions
-								<MyCurveChart /*day=ReceptAPI.USER_AVERAGE_SESSIONS.day, session=ReceptAPI.USER_AVERAGE_SESSIONS.sessionLength*//>
+								<MyCurveChart SessionsLentgh={userSessions}/>
 							</div>
 							<div className="Graphics">
-								<HexagonalChart /*RadarKind=ReceptAPI.USER_PERFORMANCE.kind, RadarValue=ReceptAPI.USER_PERFORMANCE.data*//>
+								<HexagonalChart RadarGrafics={userPerformance}/>
 							</div>
 							<div className="ObjectifScore">
 								Score
-								<MyRadialBarChart /*score=ReceptAPI.USER_MAIN_DATA.todayScore*//>
+								<MyRadialBarChart score={userMain.todayScore}/>
 							</div>
 						</div>
 					</div>
 					<div className="PersonnaDiv2">
-						<PersonnaDiv id="Calories" /*count={ReceptAPI.USER_MAIN_DATA.keyData.calorieCount}*/ section="Calories" image="./Images/calories-icon.png"/>
-						<PersonnaDiv id="Protéines" /*count={ReceptAPI.USER_MAIN_DATA.keyData.proteinCount}*/ section="Protéines" image="./Images/protein-icon.png"/>
-						<PersonnaDiv id="Glucides" /*count={ReceptAPI.USER_MAIN_DATA.keyData.carbohydrateCount}*/  section="Glucides" image="./Images/carbs-icon.png"/>
-						<PersonnaDiv id="Lipides" /*count={ReceptAPI.USER_MAIN_DATA.keyData.lipidCount}*/ section="Lipides" image="./Images/fat-icon.png"/>
+						<PersonnaDiv id="Calories" count={userMain.keyData.calorieCount+" kcal"} section="Calories" image="./Images/calories-icon.png"/>
+						<PersonnaDiv id="Protéines" count={userMain.keyData.proteinCount+" g"} section="Protéines" image="./Images/protein-icon.png"/>
+						<PersonnaDiv id="Glucides" count={userMain.keyData.carbohydrateCount+" g"} section="Glucides" image="./Images/carbs-icon.png"/>
+						<PersonnaDiv id="Lipides" count={userMain.keyData.lipidCount+" g"} section="Lipides" image="./Images/fat-icon.png"/>
 					</div>
 				</div>
 			</div>
 		</div>
     </div>
-  );
+	);
 }
 
 export default App;

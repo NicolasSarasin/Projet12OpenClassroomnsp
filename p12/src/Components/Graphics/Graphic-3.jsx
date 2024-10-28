@@ -2,45 +2,41 @@ import "../../project.css";
 import React from "react";
 import {Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer} from 'recharts';
 
-const data = [
+const HexagonalChart = (props) => {
+	const {RadarGrafics} = props;
+  const data = [
     {
-      subject: 'Math',
-      A: 120,
-      B: 110,
-      fullMark: 150,
+      subject: RadarGrafics.data[0].kind,
+      A: RadarGrafics.data[0].value,
+      fullMark: RadarGrafics.data[0].value,
     },
     {
-      subject: 'Chinese',
-      A: 98,
-      B: 130,
-      fullMark: 150,
+      subject: RadarGrafics.data[1].kind,
+      A: RadarGrafics.data[1].value,
+      fullMark: RadarGrafics.data[1].value,
     },
     {
-      subject: 'English',
-      A: 86,
-      B: 130,
-      fullMark: 150,
+      subject: RadarGrafics.data[2].kind,
+      A: RadarGrafics.data[2].value,
+      fullMark: RadarGrafics.data[2].value,
     },
     {
-      subject: 'Geography',
-      A: 99,
-      B: 100,
-      fullMark: 150,
+      subject: RadarGrafics.data[3].kind,
+      A: RadarGrafics.data[3].value,
+      fullMark: RadarGrafics.data[3].value,
     },
     {
-      subject: 'Physics',
-      A: 85,
-      B: 90,
-      fullMark: 150,
+      subject: RadarGrafics.data[4].kind,
+      A: RadarGrafics.data[4].value,
+      fullMark: RadarGrafics.data[4].value,
     },
     {
-      subject: 'History',
-      A: 65,
-      B: 85,
-      fullMark: 150,
+      subject: RadarGrafics.data[5].kind,
+      A: RadarGrafics.data[5].value,
+      fullMark: RadarGrafics.data[5].value,
     },
-];
-const HexagonalChart = () => (
+  ];
+  return (
     <ResponsiveContainer width="100%" height={300}>
       <RadarChart
         cx="50%"
@@ -49,11 +45,11 @@ const HexagonalChart = () => (
         data={data}
       >
         <PolarGrid />
-        <PolarAngleAxis dataKey="subject" />
-        <PolarRadiusAxis angle={30} domain={[0, 150]} />
-        <Radar name="Mike" dataKey="A" stroke="#8884D8" fill="#8884D8" fillOpacity={0.6} />
-        <Radar name="Lily" dataKey="B" stroke="#82CA9D" fill="#82CA9D" fillOpacity={0.6} />
+        <PolarAngleAxis dataKey="subject"/>
+        <PolarRadiusAxis angle={30} domain={[0, "fullMark"]} />
+        <Radar name="Mike" dataKey="A" stroke="#E60000" fill="#E60000" fillOpacity={0.7} />
       </RadarChart>
     </ResponsiveContainer>
-);
+  )
+};
 export default HexagonalChart;

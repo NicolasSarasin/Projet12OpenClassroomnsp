@@ -1,10 +1,17 @@
 import "../../project.css";
 function PersonnaDiv(props){
 	//props to use here
-	const {section, image} = props;
+	const {section, image, count} = props;
     return (
         <div className="App">
-			<div className="PersonnaFood"><img src={image} className="logoPersonnaFood" alt="logoPersonnaFood"/>{section}</div>
+			<div className="PersonnaFood"><img src={image} className="logoPersonnaFood" alt="logoPersonnaFood"/>
+                <div className="PersonnaFoodDiv">
+                    <h1 className="h1PersonnaFood">
+                        {count}
+                    </h1>
+                    <span>{section}</span>
+                </div>
+            </div>
         </div>
     )
 }
