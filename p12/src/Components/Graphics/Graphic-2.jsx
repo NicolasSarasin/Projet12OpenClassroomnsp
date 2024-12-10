@@ -1,32 +1,64 @@
 import "../../project.css";
-import React from "react";
-import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import React, { useState } from "react";
+import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, Rectangle } from "recharts";
 
 const MyCurveChart = (props) => {
-	const {SessionsLentgh} = props;
-  const data = [
-    { Day: SessionsLentgh.sessions[0].day, sessionlength: SessionsLentgh.sessions[0].sessionLength },
-    { Day: SessionsLentgh.sessions[1].day, sessionlength: SessionsLentgh.sessions[1].sessionLength },
-    { Day: SessionsLentgh.sessions[2].day, sessionlength: SessionsLentgh.sessions[2].sessionLength },
-    { Day: SessionsLentgh.sessions[3].day, sessionlength: SessionsLentgh.sessions[3].sessionLength },
-    { Day: SessionsLentgh.sessions[4].day, sessionlength: SessionsLentgh.sessions[4].sessionLength },
-    { Day: SessionsLentgh.sessions[5].day, sessionlength: SessionsLentgh.sessions[5].sessionLength },
-    { Day: SessionsLentgh.sessions[6].day, sessionlength: SessionsLentgh.sessions[6].sessionLength },
-  ];
+  const { SessionsLength } = props;
+  const [hoverIndex, setHoverIndex] = useState(null);
+
+  const handleMouseMove = (e) => {
+    if (e && e.activeTooltipIndex !== undefined) {
+      setHoverIndex(e.activeTooltipIndex);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setHoverIndex(null);
+  };
+
   return (
-    <ResponsiveContainer width="100%" height={300}>
+    <ResponsiveContainer width="100%" height={247}>
       <LineChart
-        data={data}
-        margin={{ top: 20, right: 30, left: -20, bottom: 5 }}
+        data={SessionsLength.sessions}
+        margin={{ top: 10, right: 0, left: -60, bottom: 25 }}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
       >
-        <XAxis dataKey="Day" />
-        <YAxis domain={[0, 60]} />
-        <Tooltip contentStyle={{ backgroundColor: '#E60000', color:'white'}}/>
-        <Legend formatter={(value, entry, index) => <span className="text-color-class">{value}</span>}/>
-        <Line type="monotone" dataKey="sessionlength" stroke="#d0d0d0" strokeWidth={2} />
+        {/* Dégradé pour la ligne */}
+        <defs>
+          <linearGradient id="d0d0d0ToWhite" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="#d0d0d0" />
+            <stop offset="100%" stopColor="white" />
+          </linearGradient>
+        </defs>
+
+        <XAxis dataKey="day" />
+        <YAxis domain={[0, 60]} display={"none"} />
+        <Tooltip contentStyle={{ backgroundColor: "white", color: "black" }} />
+
+        {/* Rectangle dynamique à partir du point survolé */}
+        {hoverIndex !== null && (
+          <Rectangle
+            x={`${(hoverIndex / SessionsLength.sessions.length) * 100}%`}
+            y="0"
+            width={`${((SessionsLength.sessions.length - hoverIndex) / SessionsLength.sessions.length) * 100}%`}
+            height="100%"
+            fill="rgba(24, 0, 0, 0.9)" // Couleur de fond semi-transparente
+          />
+        )}
+
+        {/* Ligne de la courbe */}
+        <Line
+          type="monotone"
+          dataKey="sessionLength"
+          stroke="url(#d0d0d0ToWhite)"
+          strokeWidth={2}
+          activeDot={{ r: 4 }}
+          dot={false}
+        />
       </LineChart>
     </ResponsiveContainer>
   );
-}
+};
 
 export default MyCurveChart;

@@ -1,6 +1,9 @@
 @media screen and (min-width: 1024px) and (min-height: 780px){
-	body{
+	/*body{
 		margin: auto;
+	}*/
+	.App {
+  		width: 1400px;
 	}
 	header,.verticalLayer{
 		background-color: black;
@@ -8,7 +11,7 @@
 	header{
 		display: flex;
 		justify-content: space-between;
-		padding: 10px 40px 0px 10px;
+		padding: 10px 100px 0px 25px;
 		height: 91px;
 		font-size: 25px;
 	}
@@ -19,6 +22,7 @@
 	.logo{
 		width:57px;
 		height:57px;
+		margin-top: 15px;
 	}
 	header a,.verticalLayer a{
 		color: white;
@@ -33,11 +37,11 @@
 	}
 	.verticalLayer{
 		color: white;
-		width: 200px;
+		width: 117px;
 		min-height: 720px;
-		max-height: 100%;
+		max-height: 1024px;
 		margin-top: 0px;
-		padding-top: 10px;
+		padding-top: 200px;
 		padding-bottom: 10px;
 	}
 	.href{
@@ -51,7 +55,8 @@
 	}
 	.Copiryght{
 		transform: rotate(-90deg);
-		margin-top: 150px;
+		margin-top: 300px; 
+		white-space: nowrap;
 	}
 	.Personna{
 		width: 100%;
@@ -64,18 +69,29 @@
 		color: #E60000;
 		margin-left: 10px;
 	}
+	.PersonaFelicitation{
+		text-align: left;
+		margin-top: 0px;
+		margin-bottom: 50px;
+	}
 	.PersonnaDiv{
-		width: 99%;
-		display: flex;
+		width: 100%;
+		display: flex;/**/
 		justify-content: space-between;
 	}
 	.PersonnaDiv1{
-		width: 85%;
+		width: 75%;
 	}
 	.PersonnaDailyActivity{
 		width: 100%;
 		height: 320px;
 		margin-bottom: 25px;
+		text-align:left;
+		position: relative;
+	}
+	
+	.PersonnaDailyActivitySpan{
+		margin-left: 25px;
 	}
 	.PersonnaScore{
 		display: flex;
@@ -85,19 +101,22 @@
 		background-color: #E60000;
 		color: white;
 		border-radius: 6px;
-		width: 31%;
-		height: 320px;
+		width: 32%;
+		height: 263px;
 	}
 	.Graphics{
 		background-color: #282D30;
 		color: white;
 		border-radius: 6px;
-		width: 31%;
-		height: 320px;
+		width: 32%;
+		height: 263px;
 	}
 	.TimeSessions,.ObjectifScore,.Graphics{
-		padding-top: 30px;
-		padding-left: 25px;
+		padding-top: 15px;
+		padding-left: 0px;
+	}
+	.ScoreSpan, .ScoreSpan2{
+		margin-left: 25px;
 	}
 	.TimeSessions{
 		text-align: left;
@@ -105,17 +124,17 @@
 	}
 	.ObjectifScore{
 		text-align: left;
-		width: 31%;
-		height: 320px;
+		width: 32%;
+		height: 263px;
 	}
 	.PersonnaDailyActivity,.ObjectifScore,.PersonnaFood{
-		background-color: #f3f3f3;
+		background-color: #fbfbfb;
 		border-radius: 6px;
 	}
 	.PersonnaFood{
 		height: 124px;
 		width: 258px;
-		margin-bottom: 25px;
+		margin-bottom: 42px;
 		padding-left: 25px;
 		display: flex;
 	}
@@ -131,10 +150,25 @@
 	.text-color-class,.text-color-class1{
 		color:black;
 	}
+	.FillScore{
+		z-index: 1;
+	}
 	.text-color-class1{
-		font-size: 25px;
+		font-size: 24px;
 		display: block;
-		width: 100px;
 		text-align: center;
+		width: 95px;
+		height: 56px;
+		background-color: white;
+		border-radius: 50%;
+		padding: 70px 45px 60px 45px;
+		margin-bottom: 20px;
+		margin-left: 10px;
+		z-index: -50;
+	}
+	.p-text-color-class1{
+		margin-top: 0px;
+		color:#74798C;
+		font-size: 16px;
 	}
 } 

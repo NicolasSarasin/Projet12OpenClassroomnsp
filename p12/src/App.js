@@ -32,7 +32,6 @@ function App() {
 	  const fetchData = async () => {
 		const dataUserMain = await ReceptAPI.getUserMain(id);
 		setUserMain(dataUserMain); // Set the fetched data
-		console.log("UserMain",dataUserMain);
 	  };
 	  fetchData();  // Invoke the fetch function
 	}, [id]);  // Empty dependency array ensures this runs only once after the initial render
@@ -40,7 +39,6 @@ function App() {
 	  const fetchData = async () => {
 		const dataUserActivity = await ReceptAPI.getUserActivity(id);
 		setUserActivity(dataUserActivity); // Set the fetched data
-		console.log("UserActivity",dataUserActivity);
 	  };
 	  fetchData();  // Invoke the fetch function
 	}, [id]);
@@ -48,7 +46,6 @@ function App() {
 	const fetchData = async () => {
 		const dataUserSessions = await ReceptAPI.getUserSessions(id);
 		setUserSessions(dataUserSessions); // Set the fetched data
-		console.log("UserSession",dataUserSessions);
 	  };
 	  fetchData();  // Invoke the fetch function
 	}, [id]);
@@ -56,7 +53,7 @@ function App() {
 	  const fetchData = async () => {
 		const dataUserPerformance = await ReceptAPI.getUserPerformance(id);
 		setUserPerformance(dataUserPerformance); // Set the fetched data
-		console.log("UserPerformance",dataUserPerformance);
+		console.log(dataUserPerformance);
 	  };
 	  fetchData();  // Invoke the fetch function
 	}, [id]);
@@ -67,22 +64,23 @@ function App() {
 			<VerticalLayer/>
 			<div className="Personna">
 				<div className="Title"><h1>Bonjour<span className="PersonnaName">{userMain.userInfos.firstName}</span></h1></div>
+				<p className='PersonaFelicitation'>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
 				<div className="PersonnaDiv">
 					<div className="PersonnaDiv1">
 						<div className="PersonnaDailyActivity">
-							Activité quotidienne
+							<span className='PersonnaDailyActivitySpan'>Activité quotidienne</span>
 							<MyBarChart bars={userActivity}/>
 						</div>
 						<div className="PersonnaScore">
 							<div className="TimeSessions">
-								Durée moyenne des sessions
-								<MyCurveChart SessionsLentgh={userSessions}/>
+								<span className='ScoreSpan'>Durée moyenne des <br/><span className='ScoreSpan2'>sessions</span></span>
+								<MyCurveChart SessionsLength={userSessions}/>
 							</div>
 							<div className="Graphics">
 								<HexagonalChart RadarGrafics={userPerformance}/>
 							</div>
 							<div className="ObjectifScore">
-								Score
+								<span className='ScoreSpan'>Score</span>
 								<MyRadialBarChart score={userMain.todayScore}/>
 							</div>
 						</div>

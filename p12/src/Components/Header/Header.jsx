@@ -3,7 +3,7 @@ import React from "react";
 //import { Link } from "react-router-dom";
 function Header() {
     return (
-        <div className="App">
+        <div className="header">
             <header>
 			    <div className="Logo_SoprtSee"><img src="./Images/Logo_SoprtSee.png" alt="Logo" className="logo"/><p>SportSee</p></div>
 			    <a href="#">Accueil</a>

@@ -37,17 +37,20 @@ const HexagonalChart = (props) => {
     },
   ];
   return (
-    <ResponsiveContainer width="100%" height={300}>
+    <ResponsiveContainer width="100%" height={260}>
       <RadarChart
         cx="50%"
         cy="50%"
         outerRadius="80%"
         data={data}
+        margin={{
+          top: 0, right: 110, left: 0, bottom: 0,
+        }}
       >
-        <PolarGrid />
-        <PolarAngleAxis dataKey="subject"/>
-        <PolarRadiusAxis angle={30} domain={[0, "fullMark"]} />
-        <Radar name="Mike" dataKey="A" stroke="#E60000" fill="#E60000" fillOpacity={0.7} />
+        <PolarGrid stroke="white"/>
+        <PolarAngleAxis stroke="white" dataKey="subject" />
+        <PolarRadiusAxis stroke="white" angle={30} domain={[0, "fullMark"]} display={"none"} />
+        <Radar name="Mike" dataKey="A" stroke="#E60000" strokeOpacity={0.7} fill="#E60000" fillOpacity={0.7} />
       </RadarChart>
     </ResponsiveContainer>
   )

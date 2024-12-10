@@ -1,3 +1,5 @@
+import DataAdapters from "./DataAdapters";
+
 const ReceptAPI = {
     getUserMain : async function (userId) {
         try {
@@ -6,9 +8,8 @@ const ReceptAPI = {
             if (!response.ok) {
                 throw new Error('Erreur de réseau');
             }
-            const data = response.json();
-            console.log("userMain",data);
-            return data/*.data*/;
+            const data = await response.json();
+            return DataAdapters.userMainFromAPI(data.data);
         } 
         catch (error) {
             console.error('Il y a eu un problème avec la récupération des données:', error);
@@ -17,27 +18,12 @@ const ReceptAPI = {
 
     getUserActivity : async function (userId) {
         try {
-            const response = await fetch('./API/User_activity.json'/*+userId*/);
+            const response = await fetch('http://localhost:3000/user/'+userId+'/activity');
             if (!response.ok) {
                 throw new Error('Erreur de réseau');
             }
-            const data = response.json();
-            /*const userActivityFromAPI = (dataFromAPI)=>
-            {
-                return {
-                    data:
-                    {
-                        id: dataFromAPI.data.id,
-                        sessions:
-                        [{
-                            day: dataFromAPI.data.sessions.day,
-                            kilogram: dataFromAPI.data.sessions.kilogram,
-                            calories: dataFromAPI.data.sessions.calories
-                        }],
-                    }
-                };
-            }*/
-            return data//(,userActivityFromAPI);
+            const data = await response.json();
+            return DataAdapters.userActivityFromAPI(data.data);
         } catch (error) {
             console.error('Il y a eu un problème avec la récupération des données:', error);
         }
@@ -45,26 +31,12 @@ const ReceptAPI = {
 
     getUserSessions : async function (userId) {
         try {
-            const response = await fetch('./API/User_average_sessions.json'/*+userId*/);
+            const response = await fetch('http://localhost:3000/user/'+userId+'/average-sessions');
             if (!response.ok) {
                 throw new Error('Erreur de réseau');
             }
-            const data = response.json();
-            /*const userSessionsFromAPI = (dataFromAPI)=>
-            {
-                return {
-                    data:
-                    {
-                        id: dataFromAPI.data.id,
-                        sessions:
-                        [{
-                            day: dataFromAPI.data.sessions.day,
-                            sessionLength: dataFromAPI.data.sessions.SessionLength
-                        }]
-                    }
-                };
-            }*/
-            return data/*(,userSessionsFromAPI)*/;
+            const data = await response.json();
+            return DataAdapters.userSessionsFromAPI(data.data);
         } catch (error) {
             console.error('Il y a eu un problème avec la récupération des données:', error);
         }
@@ -72,56 +44,16 @@ const ReceptAPI = {
 
     getUserPerformance : async function (userId) {
         try {
-            const response = await fetch('./API/User_performance.json'/*+userId*/);
+            const response = await fetch(/*'./API/User_performance.json'*/'http://localhost:3000/user/'+userId+'/performance');
             if (!response.ok) {
                 throw new Error('Erreur de réseau');
             }
-            const data = response.json();
-            /*const userPerformanceFromAPI = (dataFromAPI)=>
-            {
-                return {
-                    data:
-                    {
-                        id: dataFromAPI.data.id,
-                        kind:
-                        {},
-                        data:
-                        [
-                            {
-                                value:dataFromAPI.data.data.value,
-                                kind:dataFromAPI.data.data.kind
-                            }
-                        ]
-                    }
-                };
-            }*/
-            return data//(/*,userPerformanceFromAPI*/);
+            const data = await response.json();
+            console.log("userPerformance",data);
+            return DataAdapters.userPerformanceFromAPI(data.data);
         } catch (error) {
             console.error('Il y a eu un problème avec la récupération des données:', error);
         }
     }
 }
 export default ReceptAPI;
-/*const userMainFromAPI = (dataFromAPI)=>
-    {
-        return {
-            data:
-            {
-                id: dataFromAPI.data.id,
-                userInfos:
-                {
-                    firstName: dataFromAPI.data.userInfos.firstName,
-                    lastName: dataFromAPI.data.userInfos.lastName,
-                    age: dataFromAPI.data.userInfos.age
-                },
-                todayScore: dataFromAPI.data.todayScrore,
-                keyData:
-                {
-                    calorieCount: dataFromAPI.data.keyData.calorieCount,
-                    proteinCount: dataFromAPI.data.keyData.proteinCount,
-                    carbohydrateCount: dataFromAPI.data.keyData.carbohydrateCount,
-                    lipidCount: dataFromAPI.data.keyData.lipidCount,
-                }
-            }
-        };
-    }*/

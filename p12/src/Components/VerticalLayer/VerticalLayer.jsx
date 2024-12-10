@@ -3,7 +3,7 @@ import React from "react";
 //import { Link } from "react-router-dom";
 function VerticalLayer(){
     return (
-        <div className="App">
+        <div className="VerticalLayer">
             <div className="verticalLayer">
                 <div className="href">
                     <a href="#"><img src="./Images/icon.png" alt="ImageNav1" className="logo2"/></a>
