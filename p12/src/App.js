@@ -53,7 +53,6 @@ function App() {
 	  const fetchData = async () => {
 		const dataUserPerformance = await ReceptAPI.getUserPerformance(id);
 		setUserPerformance(dataUserPerformance); // Set the fetched data
-		console.log(dataUserPerformance);
 	  };
 	  fetchData();  // Invoke the fetch function
 	}, [id]);

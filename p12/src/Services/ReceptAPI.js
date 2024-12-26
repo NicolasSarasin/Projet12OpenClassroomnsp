@@ -49,7 +49,6 @@ const ReceptAPI = {
                 throw new Error('Erreur de réseau');
             }
             const data = await response.json();
-            console.log("userPerformance",data);
             return DataAdapters.userPerformanceFromAPI(data.data);
         } catch (error) {
             console.error('Il y a eu un problème avec la récupération des données:', error);
