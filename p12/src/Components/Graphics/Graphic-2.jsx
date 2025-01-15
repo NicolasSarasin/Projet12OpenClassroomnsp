@@ -1,64 +1,79 @@
+import { ResponsiveContainer, LineChart, XAxis, YAxis, Line, Tooltip } from 'recharts';
 import "../../project.css";
-import React, { useState } from "react";
-import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, Rectangle } from "recharts";
-const CustomBackground = ({ splitX, height }) => {
-  return (
-    <>
-      {/* Left part */}
-      <Rectangle
-        x={0}
-        y={0}
-        width={splitX}
-        height={height}
-        fill="rgba(255, 0, 0, 1)" // Red with transparency
-      />
-    </>
-  );
-};
 
-const MyCurveChart = (props) => {
-  const { SessionsLength } = props;
-  const [splitX, setSplitX] = useState(0);
+function AverageSessionsChart({ data }) {
 
-  const handleMouseMove = (state) => {
-    if (state.isTooltipActive) {
-      setSplitX(state.activeCoordinate.x);
-    }
-  };
-  
-  return (
-    <ResponsiveContainer width="100%" height={247}>
-      <LineChart
-        data={SessionsLength.sessions}
-        margin={{ top: 10, right: 0, left: -60, bottom: 25 }}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={() => setSplitX(0)}
-        width="100%"
-        height={247}
-      >
-        {/*console.log(handleMouseMove)*/}
-        <defs>
-          <linearGradient id="d0d0d0ToWhite" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#d0d0d0" />
-            <stop offset="100%" stopColor="white" />
-          </linearGradient>
-        </defs>
-        <XAxis dataKey="day" tick={{fill:"#d0d0d0"}} />
-        <YAxis domain={[0, 60]} display={"none"} />
-        <Tooltip contentStyle={{ backgroundColor: "white", color: "black" }} />
-        <CustomBackground splitX={splitX} height={247} />
-        {/* Ligne de la courbe */}
-        <Line
-          type="monotone"
-          dataKey="sessionLength"
-          stroke="url(#d0d0d0ToWhite)"
-          strokeWidth={2}
-          activeDot={{ r: 4 }}
-          dot={false}
-        />
-      </LineChart>
-    </ResponsiveContainer>
-  );
-};
+    const CustomTooltip = ({ active, payload }) => {
+        if (active && payload && payload.length) {
+            return (
+                <div className="toolTipContainer">
+                    <p className="toolTipText">{payload[0].value}min</p>
+                </div>
+            );
+        }
 
-export default MyCurveChart;
+        return null;
+    };
+
+    return (
+        <div className="linechart">
+            <span className="sessionsTitle">Durée moyenne des<br/> sessions</span>
+            <ResponsiveContainer width="100%" height="100%" className="responsiveChart">
+                <LineChart
+                    data={data.sessions}
+                    margin={{ top: 0, right: 0, left: 0, bottom: 15 }}
+                    
+                    onMouseMove={(e) => {
+                        if ( e.isTooltipActive === true ) {
+                            const chartContainer = document.querySelector('.responsiveChart');
+                            let div = chartContainer.querySelector('.recharts-wrapper');
+                            let windowWidth = div.clientWidth;
+                            let mouseXpercentage = Math.round((e.activeCoordinate.x / windowWidth) * 100);
+                            div.style.background = `linear-gradient(90deg, transparent ${mouseXpercentage}%, rgba(0,0,0,0.2) ${mouseXpercentage}%, rgba(0,0,0,0.2) 100%)`;
+                        }
+                    }}   
+                    
+                    onMouseLeave={() => {
+                        const chartContainer = document.querySelector('.responsiveChart');
+                        let div = chartContainer.querySelector('.recharts-wrapper');
+                        div.style.background = 'none';
+                    }}
+                >
+                    <defs>
+                        <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="40%" stopColor="rgba(255, 255, 255, 0.5)" />
+                            <stop offset="100%" stopColor="rgba(255, 255, 255)" />
+                        </linearGradient>
+                    </defs>
+                    <XAxis 
+                        dataKey="day" 
+                        tickLine={false} 
+                        axisLine={false} 
+                        stroke="white" 
+                        style={{ opacity: "0.6" }} 
+                        tick={{ fontSize: 12}}
+                    />
+                    <YAxis hide domain={[0, 'dataMax + 40']} />
+                    <Line 
+                        type="monotone" 
+                        dataKey="sessionLength" 
+                        strokeWidth={2} 
+                        dot={false} 
+                        activeDot={{
+                            r: 4,
+                            strokeWidth: 8,
+                            stroke: "white",
+                            strokeOpacity: 0.2,
+                            fill: "white"
+                        }}
+                        isAnimationActive={false}
+                        stroke="url(#grad)"
+                    />
+                    <Tooltip content={<CustomTooltip />} cursor={false} />
+                </LineChart>
+            </ResponsiveContainer>
+        </div>
+    );
+}
+
+export default AverageSessionsChart;

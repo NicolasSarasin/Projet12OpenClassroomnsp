@@ -47,7 +47,7 @@ const HexagonalChart = (props) => {
           top: 0, right: 110, left: 0, bottom: 0,
         }}
       >
-        <PolarGrid stroke="white"/>
+        <PolarGrid stroke="white" radialLines={false}/>
         <PolarAngleAxis stroke="white" dataKey="subject" />
         <PolarRadiusAxis stroke="white" angle={30} domain={[0, "fullMark"]} display={"none"} />
         <Radar name="Mike" dataKey="A" stroke="#E60000" strokeOpacity={0.7} fill="#E60000" fillOpacity={0.7} />

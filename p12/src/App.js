@@ -14,6 +14,7 @@ import MyRadialBarChart from './Components/Graphics/Graphic-4.jsx';
 function App() {
 	const { id } = useParams();
 	const [userMain, setUserMain] = useState({
+		todayScore:0,
 		userInfos:{},
 		keyData:{}
 	});
@@ -72,8 +73,7 @@ function App() {
 						</div>
 						<div className="PersonnaScore">
 							<div className="TimeSessions">
-								<span className='ScoreSpan'>Durée moyenne des <br/><span className='ScoreSpan2'>sessions</span></span>
-								<MyCurveChart SessionsLength={userSessions}/>
+								<MyCurveChart data={userSessions}/>
 							</div>
 							<div className="Graphics">
 								<HexagonalChart RadarGrafics={userPerformance}/>

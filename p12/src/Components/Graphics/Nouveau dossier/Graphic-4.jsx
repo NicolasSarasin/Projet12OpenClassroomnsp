@@ -1,6 +1,6 @@
 import "../../project.css";
 import React from "react";
-import { RadialBarChart, RadialBar, Legend, ResponsiveContainer, PolarAngleAxis } from 'recharts';
+import { RadialBarChart, RadialBar, Legend, Tooltip, ResponsiveContainer, PolarAngleAxis } from 'recharts';
 
 const MyRadialBarChart = (props) => {
   const {score} = props;
@@ -36,6 +36,7 @@ const MyRadialBarChart = (props) => {
           cornerRadius={10}
         />
         <Legend iconSize={0} layout="vertical" verticalAlign="middle" formatter={(value, entry, index) => <span className="text-color-class1">{value}<p className="p-text-color-class1">de votre objectif</p></span>} />
+        <Tooltip contentStyle={{ backgroundColor: '#E60000', color:'white'}}/>
       </RadialBarChart>
     </ResponsiveContainer>
   );
